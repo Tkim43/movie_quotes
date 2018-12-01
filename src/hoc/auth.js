@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-export default function(WrappedComponent){
+export default function(WrappedComponent, to = '/signIn', requireAuth = true){
     class Auth extends Component{
         componentDidMount(){
             this.checkAuth();
@@ -10,8 +10,8 @@ export default function(WrappedComponent){
             this.checkAuth();
         }
         checkAuth(){
-            if(!this.props.auth){
-                this.props.history.push('/signIn');
+            if(this.props.auth !== requireAuth){
+                this.props.history.push(to);
             }
         }
         render(){
